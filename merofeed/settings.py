@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     # libraries
     'rest_framework',
     'rest_framework.authtoken',
+    'django_extensions',
 
     # custom apps
+    'core',
+    'feed',
 ]
 
 REST_FRAMEWORK = {
@@ -52,6 +55,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+AUTH_USER_MODEL = 'core.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

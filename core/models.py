@@ -8,7 +8,7 @@ from django.conf import settings
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         if not email:
-            # otherwise returns TypeError if we pass email=None
+            # otherwise it returns TypeError if we pass email=None
             raise ValueError("Users must have an email address.")
         user = self.model(email=self.normalize_email(email), **kwargs)
         user.set_password(password)

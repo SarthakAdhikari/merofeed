@@ -4,7 +4,7 @@ import tldextract
 
 class Site(models.Model):
    rss_url = models.URLField()
-   site_url = models.CharField(primary_key=True, max_length=200, unique=True, blank=True)
+   site_url = models.CharField(primary_key=True,max_length=200, unique=True, blank=True)
 
    def save(self, *args, **kwargs):
       if getattr(self, 'rss_url'):
@@ -22,7 +22,7 @@ class Topic(models.Model):
         return self.name
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
     topic = models.ManyToManyField(Topic)
 
 
@@ -32,6 +32,7 @@ class Post(models.Model):
    link = models.URLField()
    published = models.DateTimeField()
    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+   topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
    def __str__(self):
        return f'{self.post_id} {self.title}'

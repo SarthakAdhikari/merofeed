@@ -1,0 +1,8 @@
+* Merofeed
+
+Merofeed is a news aggregator written in django.
+
+
+TODO:
+- Add background task for periodic background fetching from scripts/fetch_all.py
+- Fix empty user feed problem

@@ -32,9 +32,8 @@ def fetch_feed_and_save(urls: tuple):
     Takes urls tuple which is in format (site, <Topic Object>)
     '''
     posts = []
-    for site in urls:
+    for site,topic in urls:
         rss_url = site.rss_url
-        topic = site.topic_set.first()
         parsed = feedparser.parse(rss_url)
         for entry in parsed["entries"]:
             title  = entry.get("title")

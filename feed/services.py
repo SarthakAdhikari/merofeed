@@ -44,7 +44,7 @@ class UserFeed(Feed):
     def __init__(self,user):
         self.user = user
         self.topics = self.get_user_topics()
-        self.feed = {"data": {}}
+        self.feed = {"feed": { "topics": [], "data": {}}}
 
     def get_user_topics(self):
         if self.user.pk:
@@ -53,9 +53,9 @@ class UserFeed(Feed):
     def generate_user_feed(self):
         for topic in self.topics:
             posts = Post.objects.filter(topic=topic).order_by('-published')[:4]
-            all_post = PostSerializer(data=posts, many=True)
-            if all_post.is_valid():
-                self.feed["data"][topic.name] = all_post.data
+            all_post = PostSerializer(posts, many=True)
+            self.feed["feed"]["topics"].append(topic.name)
+            self.feed["feed"]["data"][topic.name] = all_post.data
 
 
     def get_user_feed(self):

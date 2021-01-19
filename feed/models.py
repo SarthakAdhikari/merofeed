@@ -35,6 +35,6 @@ class Post(models.Model):
    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
    def __str__(self):
-       return f'{self.post_id} {self.title}'
+       return f'{self.id} {self.title}'
 
 # import feed.fetch
